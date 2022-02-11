@@ -18,24 +18,24 @@ class FinalNet(nn.Module):
         super().__init__()
 
         # init args
-        self.num_candidate, self.num_user = Sampler.candidate_num, Sampler.user_num  # self.num_candidate:139738   num_user：： 49289
-        self.user_neigh = Sampler.user_neigh_dict  # 28487 1:584个 [585, 237, 567, 171, 136, 564,
-        self.user_neigh_r = Sampler.user_neigh_r_dict  # 7375 1:584个[5, 5, 5, 5, 4, 3, 5, 5, 3, 4
+        self.num_candidate, self.num_user = Sampler.candidate_num, Sampler.user_num  # self.num_candidate  num_user
+        self.user_neigh = Sampler.user_neigh_dict  
+        self.user_neigh_r = Sampler.user_neigh_r_dict  
 
-        self.item_neigh = Sampler.item_neigh_dict  # 122417
-        self.item_neigh_r = Sampler.item_neigh_r_dict  # 122417
+        self.item_neigh = Sampler.item_neigh_dict  
+        self.item_neigh_r = Sampler.item_neigh_r_dict  
 
-        self.user_friends = Sampler.user_friend_dict  # 7317   朋友不全 补空  0：[]
-        self.item_friends = Sampler.item_friend_dict  # 原来：84848  后来：76700   原来：116050  后来：89969
+        self.user_friends = Sampler.user_friend_dict  
+        self.item_friends = Sampler.item_friend_dict 
         self.device = TrainSettings['device']
         # self.relation_token_1 = 3
         # self.relation_token = 6
         self.embed_dim = 64
-        # self.user_embedding = nn.Embedding(self.num_user + 1, self.embed_dim).to(self.device)  # Embedding(7376, 64)
-        # self.item_embedding = nn.Embedding(self.num_candidate + 1, self.embed_dim).to( self.device)  # Embedding(106798, 64)
+        # self.user_embedding = nn.Embedding(self.num_user + 1, self.embed_dim).to(self.device) 
+        # self.item_embedding = nn.Embedding(self.num_candidate + 1, self.embed_dim).to( self.device) 
 
-        self.u2e = nn.Embedding(self.num_user + 1, self.embed_dim).to(self.device)  # Embedding(7376, 64)
-        self.v2e = nn.Embedding(self.num_candidate + 1, self.embed_dim).to(self.device)  # Embedding(106798, 64)
+        self.u2e = nn.Embedding(self.num_user + 1, self.embed_dim).to(self.device) 
+        self.v2e = nn.Embedding(self.num_candidate + 1, self.embed_dim).to(self.device)  
         self.r2e = nn.Embedding(7, self.embed_dim).to(self.device)
 
         self.hid_dim = eval(ModelSettings['hidden_dim'])  # 64
@@ -72,7 +72,7 @@ class FinalNet(nn.Module):
         all_layer = self.num_layer + 1  # self.num_layer:2 all_layer：3
         s_dim = 48
         self.all_layer = all_layer
-        self.Predictor_1 = Predictor(self.hid_dim, s_dim)  # (4*64=256,48)
+        self.Predictor_1 = Predictor(self.hid_dim, s_dim)  
         self.Predictor_2 = Predictor(self.hid_dim, s_dim)
         self.Predictor_3 = Predictor(self.hid_dim, s_dim)
 
@@ -173,7 +173,7 @@ class FinalNet(nn.Module):
 
             # e_uv = torch.cat((e_uv, e_neighbor), 0)  # torch.Size([159, 256])
 
-            # tmp_label += [self.relation_token] * len(tmp_adj[i])  # 后边的全部是评分6 [5, 5, 4, 5, 5, 3, 4, 4, 4, 5, 5, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+            # tmp_label += [self.relation_token] * len(tmp_adj[i]) 
             num_histroy_item += len(tmp_adj[i])  # 472
             tmp_label = torch.LongTensor(tmp_label).to(self.device)
             # e_r = self.r2e(tmp_label)
