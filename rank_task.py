@@ -1,4 +1,4 @@
-proj_path = "/home/kqsuo/DICER-WWW-2021-main12/DICER/" # set the absolute path of this project
+proj_path = "/home.../" # set the absolute path of this project
 
 import sys, os
 sys.path.append(proj_path)
@@ -38,8 +38,8 @@ def Run(DataSettings, ModelSettings, TrainSettings, ResultSettings,
     setup_seed(817)  # random seed
 
     model_name = ModelSettings['model_name']  # final
-    save_dir = ResultSettings['save_dir']  # /home/kqsuo/DICER-WWW-2021-main/DICER/Results/
-    save_dir = save_dir + model_name[0].upper()+model_name[1:] + '/'  # '/home/kqsuo/DICER-WWW-2021-main/DICER/Results/Final/'
+    save_dir = ResultSettings['save_dir'] 
+    save_dir = save_dir + model_name[0].upper()+model_name[1:] + '/'  
     epoch = eval(TrainSettings['epoch'])  # 500
     batch_size = eval(TrainSettings['batch_size'])  # 4096  128
     s_batch_size = eval(TrainSettings['s_batch_size'])  # 2048  64
@@ -136,10 +136,10 @@ def Run(DataSettings, ModelSettings, TrainSettings, ResultSettings,
                         'epoch': epoch,
                         'model_state_dict': Engine.model.state_dict(),
                         'optimizer_state_dict': optimizer.state_dict(),
-                    }, '/home/kqsuo/DICER-WWW-2021-main12/DICER/Models/epinion.pt')
+                    }, '/home/...Models/epinion.pt')
                     # f.write('epoch: ' + str(epoch_i) + '\n')
                     # f.write(expected_rmse+ '\n')
-                    # torch.save(Engine.model, f'/home/kqsuo/DICER-WWW-2021-main1/DICER/Models/ciao.pt')
+                    # torch.save(Engine.model, f'/home.../Models/ciao.pt')
                 else:
                     endure_count += 1
                 print("rmse on valid set: %.4f, mae:%.4f " % (expected_rmse, mae))
