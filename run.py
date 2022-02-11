@@ -29,7 +29,7 @@ if __name__ == '__main__':
         mode = 'test'
     print("34455")
     # ======= get the running setting ========
-    cfg.read("/home/kqsuo/DICER-WWW-2021-main12/DICER/Runs/configurations/example/example_final.ini")
+    cfg.read(".../R/Runs/configurations/example/example_final.ini")
     print(2)
     print(model)
     # ======= run the main file ============
