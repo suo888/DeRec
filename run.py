@@ -1,4 +1,4 @@
-proj_path = "/home/kqsuo/DICER-WWW-2021-main12/DICER/" # set the absolute path of this project
+proj_path = "/home..../" # set the absolute path of this project
 
 import sys, argparse
 sys.path.append(proj_path)
